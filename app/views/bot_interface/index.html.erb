@@ -1,0 +1,21 @@
+<div>
+	<table border="1">
+		<% 4.downto(0).each do |y| %>
+			<tr>
+				<% 0.upto(4).each do |x| %>
+					<td id=<%= "color_#{x}_#{y}" %>><%= "#{x}, #{y}" %></td>
+				<% end %>
+			</tr>
+		<% end %>
+	</table>
+</div>
+<div>
+<%= form_tag perform_bot_path, remote: true do %>
+	<%= text_field_tag 'robot_input' %>
+	<%= hidden_field_tag 'f_loc' %>
+	<%= hidden_field_tag 'x_loc' %>
+	<%= hidden_field_tag 'y_loc' %>
+	<%= submit_tag "Submit Input", class: 'submit-input' %>
+<% end %>
+</div>
+<div id='input-display'></div>

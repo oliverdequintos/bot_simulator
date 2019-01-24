@@ -1,0 +1,39 @@
+$('#x_loc').val(<%= @x_loc %>)
+$('#y_loc').val(<%= @y_loc %>)
+
+// Super weird issue happening, it can't assign @f_loc string value on text field
+var facing_location;
+<% if @f_loc == "NORTH" %>
+facing_location = "NORTH"  
+<% elsif @f_loc == "EAST" %>
+facing_location = "EAST"
+<% elsif @f_loc == "SOUTH" %>
+facing_location = "SOUTH"
+<% elsif @f_loc == "WEST" %>
+facing_location = "WEST"
+<% end %>
+
+$("#f_loc").val(facing_location);
+
+<% case @movement %>
+<% when 0 %>
+$('#input-display').append("<br/>MOVE")
+<% when 1 %>
+$('#input-display').append("<br/>LEFT")
+<% when 2 %>
+$('#input-display').append("<br/>RIGHT")
+<% when 3 %>
+$('#input-display').append("<br/>PLACE "+<%=@x_loc%> +", "+ <%=@y_loc%>+", "+facing_location)
+<% when 4 %>
+$('#input-display').append("<br/><font color='red'>Input Error!</font>")
+<% when 5 %>
+$('#input-display').append("<br/><font color='green'>Output: "+<%=@x_loc%> +", "+ <%=@y_loc%>+", "+facing_location+"</font>")
+$('#x_loc').val('')
+$('#y_loc').val('')
+$('#f_loc').val('')
+<% end %>
+
+<% if @movement < 4 %>
+$("td").css('background-color', '')
+$("#color_"+<%=@x_loc%>+"_"+<%=@y_loc%>).css('background-color', 'blue')
+<% end %>
